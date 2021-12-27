@@ -4,21 +4,58 @@ const generateTables = require('../../functions/generateTables');
 class Local {
     constructor(options = {} ) {
         this.options = {
-            modelsPath: options.modelsPath || "models"
+            modelsPath: options.modelsPath,
+            tables: options.tables,
+            name: options.name || "default"
         };
     }
 
     async create() {
-        const generatedTables = await generateTables(this.options.modelsPath || "models");
+        let db;
+        if (this.options.tables && !this.options.modelsPath) {
+            db = await createConnection({
+                name: this.options.name,
+                type: "better-sqlite3",
+                database: './data/' + this.options.name + '/datafile',
+                entities: this.options.tables,
+                logging: true,
+                synchronize: true
+            });
+        }
 
-        const db = await createConnection({
-            name: this.options.database,
-            type: "better-sqlite3",
-            database: './data/' + this.options.database + '/datafile',
-            entities: generatedTables,
-            logging: true,
-            synchronize: true
-        });
+        else if (this.options.tables && this.options.modelsPath) {
+            const generatedTables = await generateTables(this.options.modelsPath);
+            const tables = [...generatedTables, ...this.options.tables];
+
+            db = await createConnection({
+                name: this.options.name,
+                type: "better-sqlite3",
+                database: './data/' + this.options.name + '/datafile',
+                entities: tables,
+                logging: true,
+                synchronize: true
+            });
+        }
+
+        else if (!this.options.tables && this.options.modelsPath) {
+            const generatedTables = await generateTables(this.options.modelsPath);
+
+            db = await createConnection({
+                name: this.options.name,
+                type: "better-sqlite3",
+                database: './data/' + this.options.name + '/datafile',
+                entities: generatedTables,
+                logging: true,
+                synchronize: true
+            });
+        }
+
+        else {
+            return {
+                error: true,
+                message: "Invalid database params."
+            }
+        }
 
         return {
             query: db.query,

@@ -1,10 +1,5 @@
-const { nSQL } = require('@nano-sql/core');
-
 class Database {}
 Database.enabled = false;
-
-Database.options = {};
-Database.Client = nSQL();
 
 Database.types = {
     local: require('./types/local'),
@@ -13,11 +8,12 @@ Database.types = {
 }
 
 Database.create = async (type = "", options = {}) => {
+    options.name = options.name? options.name: "default";
+    options.modelsPath = options.modelsPath? options.modelsPath: "models";
+
     console.log("[ database ]:", "Installing", type + "...");
 
-    if (Database.types[type] && options.default) {
-        options.name = "default";
-
+    if (Database.types[type]) {
         const Instance = new Database.types[type](options);
         return await Instance.create();
     }

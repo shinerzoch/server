@@ -18,7 +18,6 @@ Server.Cookies = require('./modules/Cookies');
 Server.Session = require('./modules/Session');
 Server.AutoRoutes = require('./modules/AutoRoutes');
 Server.ServerSideEvents = require('./modules/ServerSideEvents');
-Server.AuthSystem = require('./modules/AuthSystem');
 Server.WebSockets = require('./modules/WebSockets');
 
 exports.Server = Server;
