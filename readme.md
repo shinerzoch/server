@@ -1,4 +1,5 @@
 # Getting Started
+
 To get started please run the following commands from your project directory. If you havent done so yet please make sure you have [NodeJS](https://nodejs.org/en/) installed. Please make sure you `init` your project by using the command below.
 
 `npm init --yes`
@@ -10,6 +11,7 @@ Now in order to get started using our package as your server. Please run the fol
 This command will install our package inside your application. This will allow you to use the below coding to get started.
 
 **Javascript NodeJS Module**
+
 ```js
 // index.mjs
 
@@ -22,6 +24,7 @@ Server.start(port);
 ```
 
 **Javascript NodeJS**
+
 ```js
 // index.js
 
@@ -229,7 +232,7 @@ const count = await Server.db.table("users").clear();
 
 This module is created to auto generate routes based of a directory.
 
-```js 
+```js
 await Server.AutoRoutes.install({
     path: "routes" // Optional Defaults to "routes", you can use something like "client/routes".
 });
@@ -239,15 +242,15 @@ await Server.AutoRoutes.install({
 
 This module allows our server and you to interact with cookies on the clients browser.
 
-```js 
+```js
 await Server.Cookies.install();
 ```
 
 # Session Module
 
-This module requires [Cookies](#cookies-module) module to be enabled. This module created a session storage for you to use. 
+This module requires [Cookies](#cookies-module) module to be enabled. This module created a session storage for you to use.
 
-```js 
+```js
 await Server.Session.install({
     secret: "somethingrandom"
 });
@@ -257,7 +260,7 @@ await Server.Session.install({
 
 This module adds Server Side Events to the servers router.
 
-```js 
+```js
 await Server.ServerSideEvents.install();
 ```
 
@@ -265,6 +268,6 @@ await Server.ServerSideEvents.install();
 
 This module adds Web Sockets to the servers router.
 
-```js 
+```js
 await Server.WebSockets.install();
 ```
