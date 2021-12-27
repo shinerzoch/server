@@ -4,8 +4,6 @@ class Server {}
 
 global.Server = Server;
 
-Server.db = undefined;
-
 Server.path = dir => require('path').resolve(dir);
 
 Server.glob = require('./classes/Glob').glob;

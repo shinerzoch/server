@@ -5,6 +5,9 @@
     "repository": "github:shinerzoch/server",
     "version": "1.0.10016",
     "main": "index.js",
+    "scripts": {
+        "demo": ""
+    },
     "author": "",
     "license": "ISC",
     "dependencies": {
