@@ -59,10 +59,6 @@ const Server = require('../serverLibrary/index.js');
 
 - [Install Module](#auto-routes-module)
 
-### Auth
-
-- [Install Module](#auth-module)
-
 ### Cookies
 
 - [Install Module](#cookies-module)
@@ -236,17 +232,6 @@ This module is created to auto generate routes based of a directory.
 ```js 
 await Server.AutoRoutes.install({
     path: "routes" // Optional Defaults to "routes", you can use something like "client/routes".
-});
-```
-
-# Auth Module
-
-This module requires [Cookies](#cookies-module) and [Session](#session-module) modules to be enabled. This is a fully working auth system for applications. It also supports guest users if enabled.
-
-```js 
-await Server.Auth.install({
-    usersTable: Server.db.table("users"), // if you are using a main database
-    usersTable: "local" // Creates a local database to use as a replacement... This is the default action.
 });
 ```
 
