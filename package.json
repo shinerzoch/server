@@ -3,7 +3,7 @@
     "description": "All in one server, supports. Mysql, Local, and Mongodb more coming soon.",
     "keywords": ["server", "database", "api", "mysql", "mongodb", "local", "routes", "auto routes"],
     "repository": "github:shinerzoch/server",
-    "version": "1.0.10016",
+    "version": "1.0.10017",
     "main": "index.js",
     "scripts": {
         "demo": ""
