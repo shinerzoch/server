@@ -4,9 +4,9 @@ class Server {}
 
 global.Server = Server;
 
-Server.path = dir => require('path').resolve(dir);
+Server.glob = require('./modules/Glob').glob;
 
-Server.glob = require('./classes/Glob').glob;
+Server.path = dir => require('path').resolve(dir);
 
 Server.generateID = require('./functions/generateID');
 Server.start = require('./functions/start');
@@ -19,6 +19,7 @@ Server.Session = require('./modules/Session');
 Server.AutoRoutes = require('./modules/AutoRoutes');
 Server.ServerSideEvents = require('./modules/ServerSideEvents');
 Server.WebSockets = require('./modules/WebSockets');
+Server.Proxy = require('./modules/Proxy');
 
 exports.Server = Server;
 module.exports = Server;

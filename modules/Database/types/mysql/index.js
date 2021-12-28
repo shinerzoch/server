@@ -11,6 +11,7 @@ class Mysql {
             username: "test",
             password: "test",
             database: "test",
+            logging: false,
             synchronize: false,
             ...options
         }
@@ -29,7 +30,7 @@ class Mysql {
             password: this.options.password,
             database: this.options.database,
             entities: generatedTables,
-            logging: true,
+            logging: this.options.logging,
             synchronize: this.options.synchronize
         });
 

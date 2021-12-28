@@ -19,7 +19,7 @@ module.exports = async (path) => {
         }
 
         catch (err) {
-            console.error(err);
+            console.error("[", "database", "]:", "Could not import model:", tableName, err);
         }
     }
 

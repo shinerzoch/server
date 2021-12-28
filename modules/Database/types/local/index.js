@@ -4,9 +4,10 @@ const generateTables = require('../../functions/generateTables');
 class Local {
     constructor(options = {} ) {
         this.options = {
-            modelsPath: options.modelsPath,
-            tables: options.tables,
-            name: options.name || "default"
+            name: "default",
+            logging: false,
+            synchronize: false,
+            ...options,
         };
     }
 
@@ -18,8 +19,8 @@ class Local {
                 type: "better-sqlite3",
                 database: './data/' + this.options.name + '/datafile',
                 entities: this.options.tables,
-                logging: true,
-                synchronize: true
+                logging: this.options.logging,
+                synchronize: this.options.synchronize
             });
         }
 
@@ -32,8 +33,8 @@ class Local {
                 type: "better-sqlite3",
                 database: './data/' + this.options.name + '/datafile',
                 entities: tables,
-                logging: true,
-                synchronize: true
+                logging: this.options.logging,
+                synchronize: this.options.synchronize
             });
         }
 
@@ -45,8 +46,8 @@ class Local {
                 type: "better-sqlite3",
                 database: './data/' + this.options.name + '/datafile',
                 entities: generatedTables,
-                logging: true,
-                synchronize: true
+                logging: this.options.logging,
+                synchronize: this.options.synchronize
             });
         }
 
