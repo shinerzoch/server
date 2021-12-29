@@ -1,25 +1,24 @@
-console.clear();
+const server = {};
+global.$server = server;
 
-class Server {}
+const Glob = require('./modules/Glob');
+server.glob = new Glob().glob;
 
-global.Server = Server;
+server.modules = {
+    ["database"]: require('./modules/database'),
+    ["cookies"]: require('./modules/cookies'),
+    ["auto-routes"]: require('./modules/auto-routes'),
+    ["server-side-events"]: require('./modules/server-side-events'),
+    ["websockets"]: require('./modules/websockets'),
+    ["proxy"]: require('./modules/proxy'),
+    ["session"]: require('./modules/session')
+};
 
-Server.glob = require('./modules/Glob').glob;
+server.generateID = require('./functions/generateID');
+server.start = require('./functions/start');
+server.path = dir => require('path').resolve(dir);
+server.router = require('fastify')({ logger: { level: "error" } });
+server.install = require('./functions/install');
 
-Server.path = dir => require('path').resolve(dir);
-
-Server.generateID = require('./functions/generateID');
-Server.start = require('./functions/start');
-
-Server.Router = require('fastify')({ logger: { level: "error" } });
-
-Server.Database = require('./modules/Database');
-Server.Cookies = require('./modules/Cookies');
-Server.Session = require('./modules/Session');
-Server.AutoRoutes = require('./modules/AutoRoutes');
-Server.ServerSideEvents = require('./modules/ServerSideEvents');
-Server.WebSockets = require('./modules/WebSockets');
-Server.Proxy = require('./modules/Proxy');
-
-exports.Server = Server;
-module.exports = Server;
+exports.Server = server;
+module.exports = server;

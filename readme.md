@@ -1,4 +1,8 @@
-# Getting Started
+# Welcome Message
+
+Welcome, our package was made to make developement easier to start out. Instead of having to worry about making a server end everytime you start a new project. You can use this package to have a modular based server end. Our package supports both CommonJS and ES6. We do not do anything on the client side. If you want to use a client you can do so by using our [Proxy Module](https://www.npmjs.com/package/@aio-server/proxy).
+
+## Getting Started
 
 To get started please run the following commands from your project directory. If you havent done so yet please make sure you have [NodeJS](https://nodejs.org/en/) installed. Please make sure you `init` your project by using the command below.
 
@@ -6,7 +10,7 @@ To get started please run the following commands from your project directory. If
 
 Now in order to get started using our package as your server. Please run the following command.
 
-`npm i @shinerzoch/server`
+`npm i @shinerzoch/server-core`
 
 This command will install our package inside your application. This will allow you to use the below coding to get started.
 

@@ -2,7 +2,7 @@ const { createConnection } = require('typeorm');
 const generateTables = require('../../functions/generateTables');
 
 class Mysql {
-    constructor(options = {} ) {
+    constructor(options = {}, server) {
         this.options = {
             name: "mysql",
             modelsPath: "models",
@@ -17,10 +17,9 @@ class Mysql {
         }
     }
 
-    async create() {
-        const generatedTables = await generateTables(this.options.modelsPath);
-
-        console.log(this.options);
+    async create(server) {
+        const generatedTables = await generateTables(this.options.modelsPath, server);
+        
         const db = await createConnection({
             name: this.options.name,
             type: "mysql",

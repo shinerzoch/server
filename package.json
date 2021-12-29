@@ -1,36 +1,46 @@
 {
-    "name": "@shinerzoch/server",
-    "description": "All in one server, supports. Mysql, Local, and Mongodb more coming soon.",
-    "keywords": [
-        "server",
-        "database",
-        "api",
-        "mysql",
-        "mongodb",
-        "local",
-        "routes",
-        "auto routes"
-    ],
-    "repository": "github:shinerzoch/server",
-    "version": "1.0.10019",
-    "main": "index.js",
-    "scripts": {
-        "demo": ""
-    },
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "fastify": "^3.25.2",
-        "fastify-static": "^4.5.0"
-    },
-    "optionalDependencies": {
-        "@mgcrea/fastify-session": "^0.14.2",
-        "better-sqlite3": "^7.4.5",
-        "fastify-cookie": "^5.4.0",
-        "fastify-http-proxy": "^6.2.1",
-        "fastify-sse": "^1.0.0",
-        "fastify-websocket": "^4.0.0",
-        "mysql2": "^2.3.3",
-        "typeorm": "^0.2.41"
-    }
+  "name": "@aio-server/core",
+  "description": "All in one server, supports. Mysql, Local, and Mongodb more coming soon.",
+  "keywords": [
+    "server",
+    "database",
+    "api",
+    "mysql",
+    "mongodb",
+    "local",
+    "routes",
+    "auto routes"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aio-server/core.git"
+  },
+  "version": "0.0.1000",
+  "main": "index.js",
+  "scripts": {
+    "demo": ""
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fastify": "^3.25.2",
+    "fastify-static": "^4.5.0",
+    "middie": "^5.4.0",
+    "moment": "^2.29.1"
+  },
+  "optionalDependencies": {
+    "@mgcrea/fastify-session": "^0.14.2",
+    "better-sqlite3": "^7.4.5",
+    "fastify-cookie": "^5.4.0",
+    "fastify-http-proxy": "^6.2.1",
+    "fastify-sse": "^1.0.0",
+    "fastify-websocket": "^4.0.0",
+    "mysql2": "^2.3.3",
+    "typeorm": "^0.2.41"
+  },
+  "bugs": {
+    "url": "https://github.com/aio-server/core/issues"
+  },
+  "homepage": "https://github.com/aio-server/core#readme",
+  "devDependencies": {}
 }

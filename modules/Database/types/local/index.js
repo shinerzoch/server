@@ -11,7 +11,7 @@ class Local {
         };
     }
 
-    async create() {
+    async create(server) {
         let db;
         if (this.options.tables && !this.options.modelsPath) {
             db = await createConnection({
@@ -25,7 +25,7 @@ class Local {
         }
 
         else if (this.options.tables && this.options.modelsPath) {
-            const generatedTables = await generateTables(this.options.modelsPath);
+            const generatedTables = await generateTables(this.options.modelsPath, server);
             const tables = [...generatedTables, ...this.options.tables];
 
             db = await createConnection({
@@ -39,7 +39,7 @@ class Local {
         }
 
         else if (!this.options.tables && this.options.modelsPath) {
-            const generatedTables = await generateTables(this.options.modelsPath);
+            const generatedTables = await generateTables(this.options.modelsPath, server);
 
             db = await createConnection({
                 name: this.options.name,

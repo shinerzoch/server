@@ -2,7 +2,7 @@ const fs = require("fs");
 
 const getDirectory = (directory) => {
     const walk = function(dir, oldPath = "") {
-        const dirPath = Server.path(directory + oldPath);
+        const dirPath = $server.path(directory + oldPath);
 
         let results = [];
         const list = fs.readdirSync(dirPath);

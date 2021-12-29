@@ -1,16 +1,15 @@
 const fastifyStatic = require('fastify-static');
 
-let defaultOptions = {
-    publicDir: "public"
-}
-
-module.exports = async (port, options) => {
-    options = { ...defaultOptions, options };
-
-    await Server.Router.register(fastifyStatic, {
-        root: Server.path(options.publicDir),
+module.exports = async function start(options = { staticDir: "public", port: 8080 }) {
+    await $server.router.register(fastifyStatic, {
+        root: $server.path(options.staticDir),
         wildcard: false
     });
 
-    await Server.Router.listen(port || 8080);
+    await $server.router.listen(options.port || 8080);
+
+    console.log("==============================================")
+    console.log("         Server started on port", options.port)
+    console.log(`         link: http://localhost:${options.port}`)
+    console.log("==============================================")
 }

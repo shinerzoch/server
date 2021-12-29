@@ -1,33 +1,29 @@
-class Database {}
+class Database {};
+Database.name = "database";
 Database.enabled = false;
 
-Database.types = {
-    local: require('./types/local'),
-    mysql: require('./types/mysql'),
-    prisma: require('./types/prisma')
+Database.options = {
+    instanceName: "default"
 }
 
-Database.create = async (type = "", options = {}) => {
-    options.name = options.name? options.name: "default";
-    options.modelsPath = options.modelsPath? options.modelsPath: "models";
+Database.databases = {};
 
-    console.log("[ database ]:", "Installing", type + "...");
+Database.types = new Map();
+Database.types.set("mysql", require('./types/mysql'));
+Database.types.set("local", require('./types/local'));
 
-    if (Database.types[type]) {
-        const Instance = new Database.types[type](options);
-        return await Instance.create();
-    }
+Database.get = (databaseName) => Database.databases[databaseName];
 
-    else if (Database.types[type]) {
-        const Instance = new Database.types[type](options);
-        return await Instance.create();
-    }
+Database.install = async (options) => {
+    options = { ...Database.options, ...options };
+    console.log("[ database ]:", "Installing", options.type, "with the instance name of", options.instanceName);
 
-    else {
-        return {
-            error: true,
-            message: "Invalid Database type."
-        }
+    const DatabaseClass = Database.types.get(options.type);
+
+    const Instance = new DatabaseClass(options);
+    Database.databases[options.instanceName] = await Instance.create();
+    if (options.default) {
+        $server.db = Database.databases[options.instanceName];
     }
 }
 

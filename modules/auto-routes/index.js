@@ -1,22 +1,26 @@
-class AutoRoutes {}
+class AutoRoutes {};
+AutoRoutes.name = "auto-routes";
 AutoRoutes.enabled = false;
 
-AutoRoutes.install = async (options = {}) => {
-    console.log("[", "autoroutes", "]:", "Enabled");
-    options.path = options.path? options.path: 'routes';
+AutoRoutes.options = {
+    path: "routes"
+}
 
-    const routeFiles = Server.glob(options.path + '/**');
+AutoRoutes.install = (options) => {
+    options = { ...AutoRoutes.options, ...options };
+    
+    const routeFiles = $server.glob(options.path + '/**');
 
     for (let route of routeFiles) {
         route = route.replace('.js', '');
 
-        const importedRoute = require(Server.path(options.path) + route);
+        const importedRoute = require($server.path(options.path) + route);
 
         if (route === '/index') {
-            Server.Router.route({
+            $server.router.route({
                 method: importedRoute.method || 'GET',
                 url: '/',
-                handler: importedRoute,
+                handler: (req, res) => importedRoute(req, res),
                 prefixTrailingSlash: "both"
             });
         }
@@ -24,33 +28,33 @@ AutoRoutes.install = async (options = {}) => {
         else if (route.endsWith('index')) {
             route = route.replace('/index', '');
 
-            Server.Router.route({
+            $server.router.route({
                 method: importedRoute.method || 'GET',
                 url: route,
-                handler: importedRoute,
+                handler: (req, res) => importedRoute(req, res),
                 prefixTrailingSlash: "both"
             });
 
-            Server.Router.route({
+            $server.router.route({
                 method: importedRoute.method || 'GET',
                 url: route + "/",
-                handler: importedRoute,
+                handler: (req, res) => importedRoute(req, res),
                 prefixTrailingSlash: "both"
             });
         }
 
         else {
-            Server.Router.route({
+            $server.router.route({
                 method: importedRoute.method || 'GET',
                 url: route,
-                handler: importedRoute,
+                handler: (req, res) => importedRoute(req, res),
                 prefixTrailingSlash: "both"
             });
 
-            Server.Router.route({
+            $server.router.route({
                 method: importedRoute.method || 'GET',
                 url: route + "/",
-                handler: importedRoute,
+                handler: (req, res) => importedRoute(req, res),
                 prefixTrailingSlash: "both"
             });
         }
@@ -60,6 +64,7 @@ AutoRoutes.install = async (options = {}) => {
 
     console.log('[ autoroutes ]: Created', routeFiles.length, "Routes in total.");
     AutoRoutes.enabled = true;
+    console.log("[", "autoroutes", "]:", "Enabled");
     return true;
 }
 

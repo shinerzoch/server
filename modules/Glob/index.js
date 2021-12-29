@@ -1,21 +1,25 @@
-class Glob {}
-
-Glob.getDeep = require('./functions/deepGet');
-Glob.getDirectory = require('./functions/getDirectory');
-
-Glob.glob = (dir) => {
-    if (dir.endsWith('/**')) {
-        dir = dir.replace('/**', '');
-        return Glob.getDeep(dir);
+class Glob {
+    constructor(server) {
+        this.server = server
     }
 
-    else if (dir.endsWith('/*')) {
-        dir = dir.replace('/*', '');
-        return Glob.getDirectory(dir);
-    }
+    getDeep = require('./functions/deepGet');
+    getDirectory = require('./functions/getDirectory');
 
-    else {
-        return [];
+    glob = (dir) => {
+        if (dir.endsWith('/**')) {
+            dir = dir.replace('/**', '');
+            return this.getDeep(dir, this.server);
+        }
+    
+        else if (dir.endsWith('/*')) {
+            dir = dir.replace('/*', '');
+            return this.getDirectory(dir, this.server);
+        }
+    
+        else {
+            return [];
+        }
     }
 }
 
